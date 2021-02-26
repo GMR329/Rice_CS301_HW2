@@ -19,14 +19,6 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
     SeekBar greenSeekBar;
     SeekBar blueSeekBar;
 
-    int rBtnHairID;
-    int rBtnEyesID;
-    int rBtnSkinID;
-
-    RadioButton rBtnHair;
-    RadioButton rBtnEyes;
-    RadioButton rBtnSkin;
-
     //integer to keep track of hair, skin, and eyes
     int feature = 0;
 
@@ -51,14 +43,6 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-        //depending on which seekbar is used, change r, g, and b values then set color
-//        if(seekBar.getId() == redSeekBar.getId()){
-//            red = progress;
-//        }else if(seekBar.getId() == greenSeekBar.getId()){
-//            green = progress;
-//        }else {
-//            blue = progress;
-//        }
 
         switch(seekBar.getId()){
             case R.id.redSeekBar:
@@ -90,17 +74,6 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {}
-
-//    @Override
-//    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//        if(buttonView.getId() == rBtnHair.getId()){
-//            feature = 0;
-//        }else if(buttonView.getId() == rBtnEyes.getId()){
-//            feature = 1;
-//        }else{
-//            feature = 2;
-//        }
-//    }
 
     public void onRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
