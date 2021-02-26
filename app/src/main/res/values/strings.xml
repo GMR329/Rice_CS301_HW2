@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Rice_CS301_HW2</string>
+    <string name="red_view">Select Red Density</string>
+    <string name="green_view">Select Green Density</string>
+    <string name="blue_view">Select Blue Density</string>
+    <string name="hair_btn">Hair</string>
+    <string name="eyes_btn">Eyes</string>
+    <string name="skin_btn">Skin</string>
+    <string name="hair_style">Hair Style</string>
+    <string-array name="hairstyle_select_array">
+        <item>Wavy</item>
+        <item>Short</item>
+        <item>Bangs</item>
+    </string-array>
+</resources>
