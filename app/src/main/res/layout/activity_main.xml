@@ -12,14 +12,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/testText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="What's Good!"
-            android:textSize="30sp" />
-
         <com.example.rice_cs301_hw2.AvatarSurfaceView
             android:id="@+id/avatarView"
             android:layout_width="match_parent"

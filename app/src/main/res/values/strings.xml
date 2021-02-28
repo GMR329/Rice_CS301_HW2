@@ -9,7 +9,7 @@
     <string name="hair_style">Hair Style</string>
     <string-array name="hairstyle_select_array">
         <item>Wavy</item>
-        <item>Short</item>
-        <item>Bangs</item>
+        <item>Afro</item>
+        <item>Bowl</item>
     </string-array>
 </resources>
