@@ -3,6 +3,8 @@ package com.example.rice_cs301_hw2;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
@@ -27,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         greenSeekBar.setOnSeekBarChangeListener(avatarSurfaceView);
         blueSeekBar.setOnSeekBarChangeListener(avatarSurfaceView);
 
-        //Might could get rid of this... if the findViewById switch works
-        avatarSurfaceView.setSeekBar(redSeekBar, greenSeekBar, blueSeekBar);
-
         RadioButton hairRButton = (RadioButton) findViewById(R.id.hairRButton);
         RadioButton eyesRButton = (RadioButton) findViewById(R.id.eyesRButton);
         RadioButton skinRButton = (RadioButton) findViewById(R.id.skinRButton);
@@ -46,5 +45,7 @@ public class MainActivity extends AppCompatActivity {
                 R.array.hairstyle_select_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hairSpinner.setAdapter(adapter);
+
+        hairSpinner.setOnItemSelectedListener(avatarSurfaceView);
     }
 }

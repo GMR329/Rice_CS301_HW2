@@ -7,17 +7,15 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
+import android.widget.TextView;
 
-public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarChangeListener, View.OnClickListener{
+public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener{
 
     int red, green, blue;
-
-    SeekBar redSeekBar;
-    SeekBar greenSeekBar;
-    SeekBar blueSeekBar;
 
     //integer to keep track of hair, skin, and eyes
     int feature = 0;
@@ -32,13 +30,7 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     @Override
     public void onDraw(Canvas canvas){
-        mainFace.draw(canvas);
-    }
-
-    public void setSeekBar(SeekBar rSeek, SeekBar gSeek, SeekBar bSeek){
-        redSeekBar = rSeek;
-        greenSeekBar = gSeek;
-        blueSeekBar = bSeek;
+        mainFace.draw(canvas, this.getWidth() / 2, this.getHeight() / 2);
     }
 
     @Override
@@ -104,4 +96,13 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
     public void onClick(View v) {
         onRadioButtonClicked(v);
     }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        mainFace.setHairStyle(position);
+        invalidate();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {}
 }

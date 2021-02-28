@@ -46,14 +46,21 @@ public class Face {
         hairStyle = style;
     }
 
-    public void draw(Canvas canvas){
+    public void draw(Canvas canvas, int centerx, int centery){
         skinPaint.setColor(skinColor);
-        canvas.drawCircle(150, 150, 100, skinPaint);
+        canvas.drawOval(centerx - 400, centery - 600, centerx + 400, centery + 600, skinPaint);
 
         eyePaint.setColor(eyeColor);
-        canvas.drawCircle(300, 300, 50, eyePaint);
+        canvas.drawCircle(centerx + 100, centery - 100, 50, eyePaint);
+        canvas.drawCircle(centerx - 100, centery - 100, 50, eyePaint);
 
         hairPaint.setColor(hairColor);
-        canvas.drawRect(200, 200, 300, 300, hairPaint);
+        if(hairStyle == 0){
+            canvas.drawRect(200, 200, 300, 300, hairPaint);
+        }else if(hairStyle == 1){
+            canvas.drawCircle(200, 200, 50, hairPaint);
+        }else{
+            canvas.drawOval(200, 200, 400, 400, hairPaint);
+        }
     }
 }
