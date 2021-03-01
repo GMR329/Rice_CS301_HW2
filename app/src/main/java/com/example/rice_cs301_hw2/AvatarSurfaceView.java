@@ -8,12 +8,14 @@ import android.util.AttributeSet;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarChangeListener, View.OnClickListener, AdapterView.OnItemSelectedListener{
+public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarChangeListener,
+        View.OnClickListener, AdapterView.OnItemSelectedListener{
 
     int red, green, blue;
 
@@ -22,15 +24,28 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     Face mainFace = new Face();
 
+    SeekBar redBar;
+    SeekBar greenBar;
+    SeekBar blueBar;
+
+    int currentColor;
+
     public AvatarSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         setWillNotDraw(false);
     }
 
+    public void setBars(SeekBar red, SeekBar green, SeekBar blue){
+        redBar = red;
+        greenBar = green;
+        blueBar = blue;
+    }
+
     @Override
     public void onDraw(Canvas canvas){
         mainFace.draw(canvas, this.getWidth() / 2, this.getHeight() / 2);
+        updateSeekBar(feature);
     }
 
     @Override
@@ -73,28 +88,56 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
         switch(view.getId()){
             case R.id.hairRButton:
                 if(checked){
-                    feature = 0;
+//                    feature = 0;
                 }
+                feature = 0;
                 break;
             case R.id.eyesRButton:
                 if(checked){
-                    feature = 1;
+//                    feature = 1;
                 }
+                feature = 1;
                 break;
             case R.id.skinRButton:
                 if(checked){
-                    feature = 2;
+//                    feature = 2;
                 }
+                feature = 2;
                 break;
             default:
                 break;
         }
 
+        updateSeekBar(feature);
+
+    }
+
+    public void updateSeekBar(int theFeature){
+
+        if(theFeature == 0){
+            currentColor = mainFace.getHairColor();
+        }else if(theFeature == 1){
+            currentColor = mainFace.getEyeColor();
+        }else{
+            currentColor = mainFace.getSkinColor();
+        }
+
+        System.out.println("" + currentColor);
+
+        redBar.setProgress(Color.red(currentColor));
+        greenBar.setProgress(Color.green(currentColor));
+        blueBar.setProgress(Color.blue(currentColor));
     }
 
     @Override
     public void onClick(View v) {
-        onRadioButtonClicked(v);
+        if(v.getId() == R.id.randomButton){
+            mainFace.randomize();
+        }else{
+            onRadioButtonClicked(v);
+        }
+
+        invalidate();
     }
 
     @Override

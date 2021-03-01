@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -47,5 +48,10 @@ public class MainActivity extends AppCompatActivity {
         hairSpinner.setAdapter(adapter);
 
         hairSpinner.setOnItemSelectedListener(avatarSurfaceView);
+
+        Button randomButton = (Button) findViewById(R.id.randomButton);
+        randomButton.setOnClickListener(avatarSurfaceView);
+
+        avatarSurfaceView.setBars(redSeekBar, greenSeekBar, blueSeekBar);
     }
 }

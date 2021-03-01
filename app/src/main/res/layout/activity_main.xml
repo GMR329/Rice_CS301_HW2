@@ -18,6 +18,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
+        <Button
+            android:id="@+id/randomButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/random_btn"
+            android:textSize="30sp" />
+
         <LinearLayout
             android:id="@+id/selectionControlLayout"
             android:layout_width="match_parent"

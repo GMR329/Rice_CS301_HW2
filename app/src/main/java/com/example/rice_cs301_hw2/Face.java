@@ -3,6 +3,7 @@ package com.example.rice_cs301_hw2;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.widget.SeekBar;
 
 public class Face {
 
@@ -11,7 +12,7 @@ public class Face {
     private int hairColor;
 
     //if hair is 0, hair is wavy
-    //hair is 1 is short
+    //hair is 1 is an afro
     //hair is 2 is bowl cut
     private int hairStyle;
 
@@ -27,29 +28,42 @@ public class Face {
         randomize();
     }
 
-    private void randomize(){
+    public void randomize(){
         //choose random values for all 3 rgb values and give them to skin, eye, and hair
         skinColor = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
         eyeColor = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
         hairColor = Color.rgb((int) (Math.random() * 255), (int) (Math.random() * 255), (int) (Math.random() * 255));
 
         //start with a random style from 1 to 3.
-        hairStyle = (int) (Math.random() * 2);
+        hairStyle = (int) (Math.random() * 3);
+
     }
 
-    public void setSkinColor(int col){
+    public void setSkinColor(int col) {
         skinColor = col;
+    }
+
+    public int getSkinColor(){
+        return skinColor;
     }
 
     public void setEyeColor(int col){
         eyeColor = col;
     }
 
+    public int getEyeColor(){
+        return eyeColor;
+    }
+
     public void setHairColor(int col){
         hairColor = col;
     }
 
-    public void setHairStyle(int style){
+    public int getHairColor(){
+        return hairColor;
+    }
+
+    public void setHairStyle(int style) {
         hairStyle = style;
     }
 

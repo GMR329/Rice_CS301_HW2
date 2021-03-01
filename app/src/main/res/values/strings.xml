@@ -7,6 +7,8 @@
     <string name="eyes_btn">Eyes</string>
     <string name="skin_btn">Skin</string>
     <string name="hair_style">Hair Style</string>
+    <string name="random_btn">Random Face</string>
+
     <string-array name="hairstyle_select_array">
         <item>Wavy</item>
         <item>Afro</item>
