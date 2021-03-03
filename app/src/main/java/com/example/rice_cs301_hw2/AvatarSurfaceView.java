@@ -14,6 +14,17 @@ import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+/**
+ * @author Gareth Rice
+ * @version 3/21
+ *
+ * Notes:
+ *  Houses all of the actions for seekbar, buttons, and spinner.
+ *
+ * Known Bugs:
+ *
+ */
+
 public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarChangeListener,
         View.OnClickListener, AdapterView.OnItemSelectedListener{
 
@@ -24,6 +35,8 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     Face mainFace = new Face();
 
+    //need seekbars in surface view so their progress can be set when different component
+    //is selected
     SeekBar redBar;
     SeekBar greenBar;
     SeekBar blueBar;
@@ -36,21 +49,42 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
         setWillNotDraw(false);
     }
 
+    /**
+     * setBars: Get the bars that were linked in the MainActivity
+     *
+     * @param red the seekbar assigned to seekbar in this class
+     * @param green
+     * @param blue
+     */
     public void setBars(SeekBar red, SeekBar green, SeekBar blue){
         redBar = red;
         greenBar = green;
         blueBar = blue;
     }
 
+    /**
+     * onDraw: calls draw method in the  main face and updates the seekbars with correct
+     * color values
+     *
+     * @param canvas
+     */
     @Override
     public void onDraw(Canvas canvas){
         mainFace.draw(canvas, this.getWidth() / 2, this.getHeight() / 2);
         updateSeekBar(feature);
     }
 
+    /**
+     * onProgressChange: When seekbar is changed, color is changed and updated in mainFace
+     *
+     * @param seekBar
+     * @param progress
+     * @param fromUser
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 
+        //Depending on seekBar change red, green, or blue int that will make up paint color
         switch(seekBar.getId()){
             case R.id.redSeekBar:
                 red = progress;
@@ -65,6 +99,7 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
                 break;
         }
 
+        //depending on radioButton feature selection, set the color to appropriate feature
         if(feature == 0){
             mainFace.setHairColor(Color.rgb(red, green, blue));
         }else if(feature == 1){
@@ -82,26 +117,23 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {}
 
+    /**
+     * onRadioButtonClicked: select the feature whose color/style should be updated
+     *
+     * @param view
+     */
     public void onRadioButtonClicked(View view){
         boolean checked = ((RadioButton) view).isChecked();
 
+        //set feature to 0, 1, or 2 based on which radio button is selected
         switch(view.getId()){
             case R.id.hairRButton:
-                if(checked){
-//                    feature = 0;
-                }
                 feature = 0;
                 break;
             case R.id.eyesRButton:
-                if(checked){
-//                    feature = 1;
-                }
                 feature = 1;
                 break;
             case R.id.skinRButton:
-                if(checked){
-//                    feature = 2;
-                }
                 feature = 2;
                 break;
             default:
@@ -112,8 +144,14 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
 
     }
 
+    /**
+     * updateSeekBar: change color seekBars to reflect color of feature selected by radio button
+     *
+     * @param theFeature
+     */
     public void updateSeekBar(int theFeature){
 
+        //get the color that will be displayed on seekBars depending on highlighted features.
         if(theFeature == 0){
             currentColor = mainFace.getHairColor();
         }else if(theFeature == 1){
@@ -122,15 +160,21 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
             currentColor = mainFace.getSkinColor();
         }
 
-        System.out.println("" + currentColor);
-
+        //set red, green, and blue bars based on currentColor
         redBar.setProgress(Color.red(currentColor));
         greenBar.setProgress(Color.green(currentColor));
         blueBar.setProgress(Color.blue(currentColor));
     }
 
+    /**
+     * onClick: randomize face if random face button is clicked. Otherwise, it's the radio
+     * button and it should update
+     * @param v
+     */
     @Override
     public void onClick(View v) {
+        //if face button is hit, make random face with random colors and hair styles
+        //else call function for radioButton Clicked
         if(v.getId() == R.id.randomButton){
             mainFace.randomize();
         }else{
@@ -140,6 +184,14 @@ public class AvatarSurfaceView extends SurfaceView implements SeekBar.OnSeekBarC
         invalidate();
     }
 
+    /**
+     * onItemSelected: Update hairstyle based on spinner selection
+     *
+     * @param parent
+     * @param view
+     * @param position
+     * @param id
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         mainFace.setHairStyle(position);

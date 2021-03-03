@@ -11,8 +11,24 @@ import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.Button;
 
+/**
+ * @author Gareth Rice
+ * @version 3/21
+ *
+ * Notes:
+ *
+ * Known Bugs:
+ *  Hair in spinner doesn't update when face is randomized. Not sure if that was a requirement...
+ */
+
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * setup the program by finding components and linking them to the surfaceView where
+     * there action controllers are
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,17 +54,18 @@ public class MainActivity extends AppCompatActivity {
         eyesRButton.setOnClickListener(avatarSurfaceView);
         skinRButton.setOnClickListener(avatarSurfaceView);
 
-        //This is all magic that sets up the spinner for me...
+        //This is all magic that sets up the spinner for me, from the documentation...
         Spinner hairSpinner = (Spinner) findViewById(R.id.hairSpinner);
 
-        //Taken from: https://developer.android.com/guide/topics/ui/controls/spinner#java
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.hairstyle_select_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         hairSpinner.setAdapter(adapter);
 
+        //Attach all components to the avatarSurfaceView which contains most of the actions
         hairSpinner.setOnItemSelectedListener(avatarSurfaceView);
 
+        //Make the random face button that randomizes color and hairstyle
         Button randomButton = (Button) findViewById(R.id.randomButton);
         randomButton.setOnClickListener(avatarSurfaceView);
 
